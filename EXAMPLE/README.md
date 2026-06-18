@@ -10,6 +10,8 @@ php EXAMPLE/02-manipulate-document.php
 php EXAMPLE/03-diagnostics-and-limits.php
 php EXAMPLE/04-commonmark-rendering.php
 php EXAMPLE/05-end-to-end-workflow.php
+php EXAMPLE/06-llm-safe-primitives.php
+php EXAMPLE/07-patch-preview-and-insertions.php
 ```
 
 ## Component Map
@@ -22,16 +24,34 @@ php EXAMPLE/05-end-to-end-workflow.php
 | `MarkdownDocument::diagnostics()` | `03` | Read non-fatal malformed section and attribute issues. |
 | `MarkdownDocument::withUpdatedSection()` | `02`, `05` | Return a new document with one section replaced. |
 | `MarkdownDocument::withoutSection()` | `02` | Return a new document with one section removed. |
+| `MarkdownDocument::checksum()` | `06` | Read the document checksum used for stale patch rejection. |
+| `MarkdownDocument::previewUpdatedSection()` | `06` | Build a patch preview before applying an update. |
+| `MarkdownDocument::previewWithoutSection()` | `07` | Build a patch preview before removing a section. |
+| `MarkdownDocument::previewInsertSectionAfter()` | `07` | Build an insertion patch at a known source point. |
+| `MarkdownDocument::withInsertedSectionBefore()` | `02` | Insert a generated section before another section. |
+| `MarkdownDocument::withInsertedSectionAfter()` | `07` | Insert a generated section after another section. |
+| `MarkdownDocument::withAppendedSection()` | `07` | Append a generated section to the document. |
+| `MarkdownDocument::applyPatch()` | `06`, `07` | Apply a patch only when its source checksums still match. |
+| `MarkdownDocument::toEditManifest()` | `06` | Export a bounded manifest for LLM or CMS edit workflows. |
 | `MarkdownDocument::toMarkdown()` | `02`, `05` | Serialize the source-preserved document. |
 | `Section` | `01`, `02`, `05` | Read type, content, raw block, attributes, and source span. |
 | `Section::getAttribute()` | `01`, `02`, `05` | Read one attribute with an optional default. |
 | `Section::hasAttribute()` | `01` | Check attribute presence. |
+| `Section::checksum()` | `06` | Read the section source checksum. |
+| `Section::lineEnding()` | `06`, `07` | Preserve section line endings for generated replacements. |
 | `Section::toDraft()` | `02`, `05` | Start an immutable edit from an existing section. |
 | `SectionDraft` | `02`, `05` | Build replacement section Markdown. |
 | `SectionAttributes` | `02`, `04`, `05` | Construct and serialize section attribute sets. |
 | `SourceSpan` | `01` | Inspect line and byte offsets for editor integrations. |
+| `SourceSpan::toArray()` | `06` | Export source spans in manifests. |
 | `Diagnostic` | `03` | Read parser issue code, message, and line. |
 | `ParserLimits` | `03` | Override document, section count, and per-section size limits. |
+| `DocumentPatch` | `06`, `07` | Preview and apply checksummed document edits. |
+| `PatchOperation` | `06`, `07` | Internal patch operation value exposed through patch previews. |
+| `PrimitiveDefinition` | `06` | Declare required primitive attributes and content rules. |
+| `PrimitiveRegistry` | `06` | Register primitive definitions and validate documents. |
+| `PrimitiveValidationResult` | `06` | Read aggregate primitive validation state. |
+| `PrimitiveIssue` | `06` | Read validation issue code, message, type, section index, and line. |
 | `MarkdownSectionsExtension` | `04` | Register section parsing with League CommonMark. |
 | `SectionRendererRegistry` | `04` | Register renderers by section type and configure fallback rendering. |
 | `SectionRendererInterface` | `04` | Implement custom HTML renderers. |
@@ -53,9 +73,15 @@ The examples cover:
 - safe handling of unclosed sections
 - custom renderers and fallback renderers
 - immutable updates that keep the original document unchanged
+- patch previews with stale document checksum rejection
+- primitive validation for CMS and LLM edit contracts
+- insert-after and append workflows for creating primitives
+- bounded edit manifests for agent workflows
 
 ## Design Notes
 
 The document API is intentionally source-preserving. It does not reformat Markdown outside the section being edited. That makes it suitable for editor tooling, CMS transforms, and content migration scripts where preserving author formatting matters.
+
+Primitive definitions are optional contracts layered on top of parsed sections. They let applications validate attributes and content before asking an agent, migration, or CMS job to create a patch.
 
 The CommonMark extension is the rendering path. It turns section blocks into CommonMark container nodes and lets the child Markdown render normally before passing the HTML to your renderer.

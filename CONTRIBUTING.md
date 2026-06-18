@@ -15,6 +15,8 @@ composer qa
 
 - Keep files at or below 420 lines.
 - Preserve source formatting outside edited section spans.
+- Treat patch previews and checksum rejection as part of the public safety contract.
+- Keep primitive validation focused on section-level contracts, not full Markdown schema validation.
 - Prefer immutable value objects and focused services.
 - Keep CommonMark integration separate from the source-preserving document API.
 - Add or update tests for parser behavior, document rewriting, and rendering behavior.

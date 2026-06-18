@@ -1,12 +1,15 @@
 {
     "name": "nocturnal/markdown-sections",
-    "description": "Source-preserving Markdown section editor with League CommonMark rendering support.",
+    "description": "Source-preserving PHP Markdown primitive editor with League CommonMark rendering support.",
     "type": "library",
     "keywords": [
         "commonmark",
+        "cms",
+        "llm",
         "markdown",
         "markdown-editor",
         "markdown-parser",
+        "markdown-primitives",
         "source-preserving"
     ],
     "license": "MIT",

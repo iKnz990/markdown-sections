@@ -18,4 +18,17 @@ final readonly class SourceSpan
     {
         return $this->endOffset - $this->startOffset;
     }
+
+    /**
+     * @return array{startLine: int, endLine: int, startOffset: int, endOffset: int}
+     */
+    public function toArray(): array
+    {
+        return [
+            'startLine' => $this->startLine,
+            'endLine' => $this->endLine,
+            'startOffset' => $this->startOffset,
+            'endOffset' => $this->endOffset,
+        ];
+    }
 }

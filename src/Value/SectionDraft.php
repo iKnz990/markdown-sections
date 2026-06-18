@@ -34,19 +34,20 @@ final readonly class SectionDraft
         return new self($this->type, $this->attributes, $content);
     }
 
-    public function toMarkdown(): string
+    public function toMarkdown(string $lineEnding = "\n"): string
     {
         $opening = ':::' . $this->type . $this->attributes->toMarkdown();
         $content = str_replace(["\r\n", "\r"], "\n", $this->content);
+        $content = str_replace("\n", $lineEnding, $content);
 
         if ($content === '') {
-            return $opening . "\n:::";
+            return $opening . $lineEnding . ':::';
         }
 
-        if (str_ends_with($content, "\n")) {
-            return $opening . "\n" . $content . ':::';
+        if (str_ends_with($content, $lineEnding)) {
+            return $opening . $lineEnding . $content . ':::';
         }
 
-        return $opening . "\n" . $content . "\n:::";
+        return $opening . $lineEnding . $content . $lineEnding . ':::';
     }
 }

@@ -49,13 +49,16 @@ $newSection = new SectionDraft(
     content: "### Package\n\nA reusable Markdown section parser.",
 );
 
+$withProductBeforeCta = $document->withInsertedSectionBefore($cta, $newSection);
+
 echo "Original document remains unchanged:" . PHP_EOL;
 echo $document->toMarkdown() . PHP_EOL . PHP_EOL;
 
 echo "Updated callout, CTA removed:" . PHP_EOL;
 echo $withoutCta->toMarkdown() . PHP_EOL . PHP_EOL;
 
+echo "Inserted product card before CTA:" . PHP_EOL;
+echo $withProductBeforeCta->toMarkdown() . PHP_EOL . PHP_EOL;
+
 echo "Standalone section draft Markdown:" . PHP_EOL;
 echo $newSection->toMarkdown() . PHP_EOL;
-
-unset($cta);
