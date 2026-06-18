@@ -15,3 +15,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Renderer registry with custom, generic, and safe raw-source fallback renderers.
 - Diagnostics for malformed attributes and unclosed sections.
 - Examples covering parsing, manipulation, diagnostics, limits, rendering, primitive validation, and patch previews.
+- Nocturnal repair-infrastructure README, SVG diagrams, comparison docs, and edit manifest schema.

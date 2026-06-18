@@ -2,6 +2,8 @@
 
 These recipes are intentionally section-level. They do not require a full Markdown AST editor.
 
+![Section anatomy](assets/section-anatomy.svg)
+
 ## CTA
 
 ```markdown

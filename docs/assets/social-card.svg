@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">nocturnal/markdown-sections social card</title>
+  <desc id="desc">Safe Markdown edits for agents with a selected section and patch receipt.</desc>
+  <rect width="1200" height="630" fill="#050505"/>
+  <rect x="44" y="44" width="1112" height="542" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <text x="80" y="132" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="58" font-weight="700">Safe Markdown edits for agents.</text>
+  <text x="84" y="178" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="22">manifest -&gt; diff -&gt; checksum gate -&gt; patch</text>
+  <rect x="84" y="242" width="500" height="210" fill="#050505" stroke="#262626"/>
+  <rect x="126" y="296" width="390" height="86" fill="#1A0808" stroke="#990001" stroke-width="2"/>
+  <text x="116" y="278" fill="#737373" font-family="JetBrains Mono, monospace" font-size="16">input.md</text>
+  <text x="148" y="330" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="20">:::cta{href="/demo"}</text>
+  <text x="148" y="360" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="20">selected span only</text>
+  <rect x="656" y="242" width="420" height="210" fill="#050505" stroke="#262626"/>
+  <text x="690" y="292" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">PATCH-004 PASS</text>
+  <text x="690" y="340" fill="#2E7D4F" font-family="JetBrains Mono, monospace" font-size="18">checksum matched</text>
+  <text x="690" y="380" fill="#2E7D4F" font-family="JetBrains Mono, monospace" font-size="18">validation passed</text>
+  <text x="80" y="532" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="22">nocturnal/markdown-sections</text>
+</svg>

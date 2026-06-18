@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a reproducible parser, rewriting, or rendering bug.
+description: Report a reproducible parser, patch, preservation, or rendering bug.
 title: "Bug: "
 labels: ["bug"]
 body:
@@ -14,14 +14,21 @@ body:
     id: reproduction
     attributes:
       label: Reproduction
-      description: Minimal Markdown and PHP code needed to reproduce the issue.
+      description: Minimal Markdown and PHP code needed to reproduce the issue. Include the exact section being edited.
       render: php
     validations:
       required: true
   - type: textarea
+    id: patch
+    attributes:
+      label: Patch Receipt
+      description: Paste the unified diff, source span, checksum, or validation issue if the failure involved mutation.
+      render: diff
+  - type: textarea
     id: expected
     attributes:
       label: Expected Behavior
+      description: State which source bytes should have changed and which should have stayed untouched.
     validations:
       required: true
   - type: input

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">Integration architecture</title>
+  <desc id="desc">Inputs feed into nocturnal/markdown-sections and produce Markdown, diffs, HTML, and review queues.</desc>
+  <rect width="1400" height="700" fill="#050505"/>
+  <text x="80" y="92" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="46" font-weight="700">Source-preserving patch engine</text>
+  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="18">Infrastructure for CMS jobs, agents, bots, migrations, and review queues.</text>
+  <g font-family="JetBrains Mono, monospace" font-size="17">
+    <rect x="90" y="210" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="120" y="246" fill="#F2F0EA">CMS editor</text>
+    <rect x="90" y="286" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="120" y="322" fill="#F2F0EA">GitHub bot</text>
+    <rect x="90" y="362" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="120" y="398" fill="#F2F0EA">LLM agent</text>
+    <rect x="90" y="438" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="120" y="474" fill="#F2F0EA">Migration script</text>
+    <rect x="90" y="514" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="120" y="550" fill="#F2F0EA">Content pipeline</text>
+    <rect x="510" y="298" width="380" height="150" fill="#1A0808" stroke="#990001" stroke-width="3"/><text x="560" y="358" fill="#F2F0EA" font-size="22">nocturnal/markdown-sections</text><text x="560" y="398" fill="#B3B3B3">manifest, diff, checksum gate</text>
+    <rect x="1070" y="230" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="1100" y="266" fill="#F2F0EA">Markdown file</text>
+    <rect x="1070" y="314" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="1100" y="350" fill="#F2F0EA">Git diff</text>
+    <rect x="1070" y="398" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="1100" y="434" fill="#F2F0EA">CommonMark HTML</text>
+    <rect x="1070" y="482" width="240" height="56" fill="#0F0F0F" stroke="#262626"/><text x="1100" y="518" fill="#F2F0EA">Review queue</text>
+  </g>
+  <path d="M330 238 C430 238 430 336 510 336 M330 314 C430 314 430 356 510 356 M330 390 C430 390 430 376 510 376 M330 466 C430 466 430 396 510 396 M330 542 C430 542 430 416 510 416" fill="none" stroke="#990001" stroke-width="2"/>
+  <path d="M890 344 C970 344 990 258 1070 258 M890 364 C970 364 990 342 1070 342 M890 384 C970 384 990 426 1070 426 M890 404 C970 404 990 510 1070 510" fill="none" stroke="#990001" stroke-width="2"/>
+</svg>

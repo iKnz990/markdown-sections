@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">Source preservation contract</title>
+  <desc id="desc">Only the selected source span changes.</desc>
+  <rect width="1400" height="700" fill="#050505"/>
+  <text x="80" y="92" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="46" font-weight="700">Only the selected span changes.</text>
+  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="18">The prefix and suffix stay byte-for-byte intact.</text>
+  <rect x="160" y="190" width="1080" height="380" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <rect x="200" y="230" width="1000" height="84" fill="#111111" stroke="#1A1A1A"/>
+  <rect x="200" y="330" width="1000" height="110" fill="#1A0808" stroke="#990001" stroke-width="3"/>
+  <rect x="200" y="456" width="1000" height="84" fill="#111111" stroke="#1A1A1A"/>
+  <text x="230" y="280" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="22">untouched prefix</text>
+  <text x="230" y="394" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="22">rewritten section span</text>
+  <text x="230" y="506" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="22">untouched suffix</text>
+  <rect x="920" y="246" width="230" height="36" fill="#050505" stroke="#2E7D4F"/>
+  <text x="946" y="270" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="15">checksum unchanged</text>
+  <rect x="920" y="366" width="230" height="36" fill="#050505" stroke="#990001"/>
+  <text x="946" y="390" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="15">checksum replaced</text>
+  <rect x="920" y="472" width="230" height="36" fill="#050505" stroke="#2E7D4F"/>
+  <text x="946" y="496" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="15">checksum unchanged</text>
+</svg>

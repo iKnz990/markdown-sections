@@ -7,18 +7,18 @@ body:
     id: problem
     attributes:
       label: Problem
-      description: What content workflow or developer experience problem should this solve?
+      description: What unsafe edit, CMS job, agent workflow, or developer experience problem should this solve?
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
       label: Proposed Solution
-      description: Describe the smallest useful API or behavior change.
+      description: Describe the smallest useful section-level API, validation rule, manifest field, or patch behavior.
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
       label: Alternatives
-      description: What can users do today instead?
+      description: What can users do today instead, and where does it fail to preserve source safely?

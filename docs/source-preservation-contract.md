@@ -4,6 +4,8 @@
 
 The package rewrites known section spans and preserves everything else exactly.
 
+![Source preservation contract](assets/source-preservation-contract.svg)
+
 ## Guarantees
 
 - Markdown outside an edited section span is copied byte-for-byte.

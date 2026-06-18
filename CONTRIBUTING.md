@@ -27,7 +27,7 @@ Before opening a pull request:
 
 1. Run `composer qa`.
 2. Add tests for behavior changes.
-3. Update `README.md`, `EXAMPLE/README.md`, or `CHANGELOG.md` when public behavior changes.
+3. Update `README.md`, `examples/README.md`, or `CHANGELOG.md` when public behavior changes.
 4. Keep the PR focused on one behavior or maintenance task.
 
 ## Commit Messages

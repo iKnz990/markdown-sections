@@ -1,17 +1,17 @@
-# EXAMPLE
+# Examples
 
 This folder contains runnable examples for every public component in `nocturnal/markdown-sections`.
 
 Run from the package root after `composer install`:
 
 ```bash
-php EXAMPLE/01-parse-and-inspect.php
-php EXAMPLE/02-manipulate-document.php
-php EXAMPLE/03-diagnostics-and-limits.php
-php EXAMPLE/04-commonmark-rendering.php
-php EXAMPLE/05-end-to-end-workflow.php
-php EXAMPLE/06-llm-safe-primitives.php
-php EXAMPLE/07-patch-preview-and-insertions.php
+php examples/01-parse-and-inspect.php
+php examples/02-manipulate-document.php
+php examples/03-diagnostics-and-limits.php
+php examples/04-commonmark-rendering.php
+php examples/05-end-to-end-workflow.php
+php examples/06-llm-safe-primitives.php
+php examples/07-patch-preview-and-insertions.php
 ```
 
 ## Component Map

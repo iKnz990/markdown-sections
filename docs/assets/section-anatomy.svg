@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">Markdown section anatomy</title>
+  <desc id="desc">Labels for type, attributes, content, closing fence, source span, and checksum.</desc>
+  <rect width="1400" height="700" fill="#050505"/>
+  <text x="80" y="92" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="46" font-weight="700">Section anatomy</text>
+  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="18">A primitive is a bounded source span with a contract.</text>
+  <rect x="120" y="190" width="760" height="320" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <text x="160" y="252" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="24">:::cta{href="/demo" label="Book demo"}</text>
+  <text x="160" y="312" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="24">Bring one broken workflow.</text>
+  <text x="160" y="372" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="24">:::</text>
+  <text x="160" y="452" fill="#737373" font-family="JetBrains Mono, monospace" font-size="18">source: L12-L14</text>
+  <text x="430" y="452" fill="#737373" font-family="JetBrains Mono, monospace" font-size="18">sha256: 9f1c2a7b...</text>
+
+  <path d="M230 226 L230 164 L970 164" stroke="#990001" stroke-width="2"/>
+  <text x="990" y="170" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">opening fence</text>
+  <path d="M214 252 L214 574 L970 574" stroke="#990001" stroke-width="2"/>
+  <text x="990" y="580" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">closing fence</text>
+  <path d="M212 246 L212 120 L1040 120" stroke="#B00000" stroke-width="2"/>
+  <text x="1060" y="126" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">type: cta</text>
+  <path d="M314 246 L314 534 L970 534" stroke="#990001" stroke-width="2"/>
+  <text x="990" y="540" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">attributes: href, label</text>
+  <path d="M352 306 L352 76 L970 76" stroke="#990001" stroke-width="2"/>
+  <text x="990" y="82" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">content body</text>
+  <path d="M250 448 L250 620 L970 620" stroke="#D87A22" stroke-width="2"/>
+  <text x="990" y="626" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">source span + checksum</text>
+</svg>

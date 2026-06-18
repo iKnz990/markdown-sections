@@ -113,4 +113,26 @@ final class MarkdownDocumentTest extends TestCase
 
         self::assertSame(":::callout\r\nNew\r\n:::", $updated->toMarkdown());
     }
+
+    public function testPrefixAndSuffixRemainByteForByteUntouched(): void
+    {
+        $prefix = "# Title\r\n\r\nHand-authored  spacing stays.\r\n\r\n";
+        $section = ":::cta{href=\"/old\" label=\"Old\"}\r\nOld body.\r\n:::";
+        $suffix = "\r\n\r\n<!-- editor note -->\r\nFinal paragraph.";
+        $document = MarkdownSections::parse($prefix . $section . $suffix);
+        $cta = $document->findByType('cta')[0];
+
+        $updated = $document->withUpdatedSection(
+            $cta,
+            $cta->toDraft()
+                ->withAttributes(SectionAttributes::fromArray([
+                    'href' => '/new',
+                    'label' => 'New',
+                ]))
+                ->withContent('New body.'),
+        );
+
+        self::assertStringStartsWith($prefix, $updated->toMarkdown());
+        self::assertStringEndsWith($suffix, $updated->toMarkdown());
+    }
 }

@@ -4,7 +4,7 @@ Use this checklist for tagged releases.
 
 ## Before Tagging
 
-1. Confirm `README.md`, `EXAMPLE/README.md`, and `CHANGELOG.md` describe the release.
+1. Confirm `README.md`, `examples/README.md`, and `CHANGELOG.md` describe the release.
 2. Run:
 
 ```bash
@@ -29,11 +29,11 @@ git push origin main --tags
 
 ## Packagist
 
-After the GitHub repository is published:
+Before a public Packagist release:
 
 1. Submit the repository to Packagist.
 2. Enable GitHub service hook or Packagist auto-update.
-3. Confirm the package installs with:
+3. Confirm the public package installs with:
 
 ```bash
 composer require nocturnal/markdown-sections

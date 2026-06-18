@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">Agent-safe edit loop</title>
+  <desc id="desc">Parse, validate, manifest, edit, diff, checksum gate, and apply patch.</desc>
+  <rect width="1400" height="700" fill="#050505"/>
+  <text x="80" y="92" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="46" font-weight="700">Agent-safe edit loop</text>
+  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="18">Give the model a manifest, not the whole file.</text>
+  <g font-family="JetBrains Mono, monospace" font-size="16">
+    <rect x="80" y="230" width="150" height="82" fill="#0F0F0F" stroke="#262626"/><text x="108" y="266" fill="#F2F0EA">Parse</text><text x="108" y="292" fill="#B3B3B3">Markdown</text>
+    <rect x="260" y="230" width="150" height="82" fill="#0F0F0F" stroke="#262626"/><text x="288" y="266" fill="#F2F0EA">Validate</text><text x="288" y="292" fill="#B3B3B3">primitives</text>
+    <rect x="440" y="230" width="150" height="82" fill="#0F0F0F" stroke="#262626"/><text x="468" y="266" fill="#F2F0EA">Export</text><text x="468" y="292" fill="#B3B3B3">manifest</text>
+    <rect x="620" y="230" width="150" height="82" fill="#0F0F0F" stroke="#990001"/><text x="648" y="266" fill="#F2F0EA">Agent edits</text><text x="648" y="292" fill="#B3B3B3">one section</text>
+    <rect x="800" y="230" width="150" height="82" fill="#0F0F0F" stroke="#262626"/><text x="828" y="266" fill="#F2F0EA">Preview</text><text x="828" y="292" fill="#B3B3B3">diff</text>
+    <rect x="980" y="230" width="150" height="82" fill="#0F0F0F" stroke="#D87A22"/><text x="1008" y="266" fill="#F2F0EA">Checksum</text><text x="1008" y="292" fill="#B3B3B3">gate</text>
+    <rect x="1160" y="230" width="150" height="82" fill="#0F0F0F" stroke="#2E7D4F"/><text x="1188" y="266" fill="#F2F0EA">Apply</text><text x="1188" y="292" fill="#B3B3B3">patch</text>
+  </g>
+  <path d="M230 271 H260 M410 271 H440 M590 271 H620 M770 271 H800 M950 271 H980 M1130 271 H1160" stroke="#990001" stroke-width="3"/>
+  <g font-family="JetBrains Mono, monospace" font-size="16">
+    <text x="82" y="416" fill="#F2F0EA" font-weight="700">Rejected paths</text>
+    <rect x="80" y="450" width="260" height="64" fill="#1A0808" stroke="#990001"/><text x="108" y="490" fill="#F2F0EA">stale checksum</text>
+    <rect x="372" y="450" width="260" height="64" fill="#1A0808" stroke="#990001"/><text x="400" y="490" fill="#F2F0EA">missing attribute</text>
+    <rect x="664" y="450" width="260" height="64" fill="#1A0808" stroke="#990001"/><text x="692" y="490" fill="#F2F0EA">unknown attribute</text>
+    <rect x="956" y="450" width="260" height="64" fill="#1A0808" stroke="#990001"/><text x="984" y="490" fill="#F2F0EA">malformed section</text>
+  </g>
+</svg>

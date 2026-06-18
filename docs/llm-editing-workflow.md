@@ -2,6 +2,8 @@
 
 The safe path is to give an agent a manifest, not the whole file.
 
+![Agent-safe edit loop](assets/agent-safe-edit-loop.svg)
+
 ## Flow
 
 1. Parse the Markdown.
@@ -11,6 +13,8 @@ The safe path is to give an agent a manifest, not the whole file.
 5. Build a `DocumentPatch`.
 6. Show `DocumentPatch::toUnifiedDiff()` to a human or CI check.
 7. Apply the patch only if the document checksum still matches.
+
+The manifest shape is documented in [`edit-manifest.schema.json`](edit-manifest.schema.json).
 
 ## Why This Works
 

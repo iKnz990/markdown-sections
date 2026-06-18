@@ -21,3 +21,5 @@ Report vulnerabilities privately through GitHub Security Advisories when the rep
 Relevant security issues include parser denial-of-service behavior, unsafe HTML rendering defaults, source rewrite corruption that can cause content injection, and dependency vulnerabilities.
 
 This package escapes unknown section raw source by default. Custom renderers are application code and should escape untrusted values before emitting HTML.
+
+Checksum gates and patch previews are part of the safety model. Report any case where stale source can be patched without rejection.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$examples = glob(__DIR__ . '/../EXAMPLE/*.php') ?: [];
+$examples = glob(__DIR__ . '/../examples/*.php') ?: [];
 sort($examples);
 
 foreach ($examples as $example) {

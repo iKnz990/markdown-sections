@@ -1,10 +1,11 @@
 {
     "name": "nocturnal/markdown-sections",
-    "description": "Source-preserving PHP Markdown primitive editor with League CommonMark rendering support.",
+    "description": "Safe Markdown edits for agents with source-preserving PHP primitive patches.",
     "type": "library",
     "keywords": [
         "commonmark",
         "cms",
+        "agent-safe",
         "llm",
         "markdown",
         "markdown-editor",
@@ -41,7 +42,7 @@
         "test": "phpunit",
         "analyse": "phpstan analyse",
         "check-examples": "php tools/run-examples.php",
-        "check-lines": "php tools/check-file-lines.php src tests EXAMPLE tools",
+        "check-lines": "php tools/check-file-lines.php src tests examples tools",
         "qa": [
             "@check-composer",
             "@test",

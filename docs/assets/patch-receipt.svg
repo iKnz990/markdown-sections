@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
+  <title id="title">Patch receipt</title>
+  <desc id="desc">A Nocturnal repair-log style receipt for a Markdown section patch.</desc>
+  <rect width="1400" height="700" fill="#050505"/>
+  <rect x="250" y="70" width="900" height="560" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <rect x="250" y="70" width="900" height="66" fill="#1A1A1A"/>
+  <text x="300" y="112" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="34" font-weight="700">PATCH-004 PASS</text>
+  <text x="910" y="112" fill="#2E7D4F" font-family="JetBrains Mono, monospace" font-size="18">receipt</text>
+  <g font-family="JetBrains Mono, monospace" font-size="18">
+    <text x="300" y="200" fill="#737373">operation</text><text x="560" y="200" fill="#F2F0EA">update cta</text>
+    <text x="300" y="244" fill="#737373">section</text><text x="560" y="244" fill="#F2F0EA">cta</text>
+    <text x="300" y="288" fill="#737373">source</text><text x="560" y="288" fill="#F2F0EA">lines 12-14</text>
+    <text x="300" y="332" fill="#737373">document checksum</text><text x="560" y="332" fill="#2E7D4F">matched</text>
+    <text x="300" y="376" fill="#737373">primitive validation</text><text x="560" y="376" fill="#2E7D4F">passed</text>
+    <text x="300" y="420" fill="#737373">diff preview</text><text x="560" y="420" fill="#F2F0EA">3 lines changed</text>
+  </g>
+  <rect x="300" y="454" width="800" height="116" fill="#050505" stroke="#262626"/>
+  <text x="330" y="492" fill="#737373" font-family="JetBrains Mono, monospace" font-size="16">@@ -12,3 +12,3 @@ update cta</text>
+  <text x="330" y="526" fill="#B00000" font-family="JetBrains Mono, monospace" font-size="16">- Old call to action.</text>
+  <text x="330" y="556" fill="#2E7D4F" font-family="JetBrains Mono, monospace" font-size="16">+ Plan the repair.</text>
+</svg>
