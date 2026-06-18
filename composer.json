@@ -1,0 +1,53 @@
+{
+    "name": "nocturnal/markdown-sections",
+    "description": "Source-preserving Markdown section editor with League CommonMark rendering support.",
+    "type": "library",
+    "keywords": [
+        "commonmark",
+        "markdown",
+        "markdown-editor",
+        "markdown-parser",
+        "source-preserving"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nocturnal Marketing"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "league/commonmark": "^2.8"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nocturnal\\MarkdownSections\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nocturnal\\MarkdownSections\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check-composer": "composer validate --strict",
+        "test": "phpunit",
+        "analyse": "phpstan analyse",
+        "check-examples": "php tools/run-examples.php",
+        "check-lines": "php tools/check-file-lines.php src tests EXAMPLE tools",
+        "qa": [
+            "@check-composer",
+            "@test",
+            "@analyse",
+            "@check-examples",
+            "@check-lines"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

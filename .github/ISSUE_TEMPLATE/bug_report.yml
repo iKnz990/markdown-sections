@@ -1,0 +1,36 @@
+name: Bug Report
+description: Report a reproducible parser, rewriting, or rendering bug.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Minimal Markdown and PHP code needed to reproduce the issue.
+      render: php
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package Version
+      placeholder: "0.1.0"
+  - type: input
+    id: php
+    attributes:
+      label: PHP Version
+      placeholder: "8.3.0"
