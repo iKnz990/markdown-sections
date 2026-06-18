@@ -23,8 +23,8 @@
   <text x="160" y="414" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="17">:::</text>
   <text x="160" y="450" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="17">Closing copy stays untouched.</text>
 
-  <path d="M640 376 L744 376" stroke="#990001" stroke-width="4"/>
-  <path d="M744 376 L724 362 M744 376 L724 390" stroke="#990001" stroke-width="4"/>
+  <path d="M640 376 L744 376" fill="none" stroke="#990001" stroke-width="4"/>
+  <path d="M744 376 L724 362 M744 376 L724 390" fill="none" stroke="#990001" stroke-width="4"/>
   <text x="676" y="348" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">selected span only</text>
 
   <rect x="760" y="206" width="520" height="340" fill="#050505" stroke="#262626" stroke-width="2"/>

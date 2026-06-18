@@ -13,7 +13,7 @@
     <rect x="980" y="230" width="150" height="82" fill="#0F0F0F" stroke="#D87A22"/><text x="1008" y="266" fill="#F2F0EA">Checksum</text><text x="1008" y="292" fill="#B3B3B3">gate</text>
     <rect x="1160" y="230" width="150" height="82" fill="#0F0F0F" stroke="#2E7D4F"/><text x="1188" y="266" fill="#F2F0EA">Apply</text><text x="1188" y="292" fill="#B3B3B3">patch</text>
   </g>
-  <path d="M230 271 H260 M410 271 H440 M590 271 H620 M770 271 H800 M950 271 H980 M1130 271 H1160" stroke="#990001" stroke-width="3"/>
+  <path d="M230 271 H260 M410 271 H440 M590 271 H620 M770 271 H800 M950 271 H980 M1130 271 H1160" fill="none" stroke="#990001" stroke-width="3"/>
   <g font-family="JetBrains Mono, monospace" font-size="16">
     <text x="82" y="416" fill="#F2F0EA" font-weight="700">Rejected paths</text>
     <rect x="80" y="450" width="260" height="64" fill="#1A0808" stroke="#990001"/><text x="108" y="490" fill="#F2F0EA">stale checksum</text>

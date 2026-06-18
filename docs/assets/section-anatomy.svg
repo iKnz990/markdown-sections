@@ -1,26 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700" role="img" aria-labelledby="title desc">
   <title id="title">Markdown section anatomy</title>
-  <desc id="desc">Labels for type, attributes, content, closing fence, source span, and checksum.</desc>
+  <desc id="desc">A readable diagram labeling the type, attributes, content, closing fence, source span, and checksum of a Markdown section.</desc>
   <rect width="1400" height="700" fill="#050505"/>
   <text x="80" y="92" fill="#F2F0EA" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="46" font-weight="700">Section anatomy</text>
-  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="18">A primitive is a bounded source span with a contract.</text>
-  <rect x="120" y="190" width="760" height="320" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
-  <text x="160" y="252" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="24">:::cta{href="/demo" label="Book demo"}</text>
-  <text x="160" y="312" fill="#B3B3B3" font-family="JetBrains Mono, monospace" font-size="24">Bring one broken workflow.</text>
-  <text x="160" y="372" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="24">:::</text>
-  <text x="160" y="452" fill="#737373" font-family="JetBrains Mono, monospace" font-size="18">source: L12-L14</text>
-  <text x="430" y="452" fill="#737373" font-family="JetBrains Mono, monospace" font-size="18">sha256: 9f1c2a7b...</text>
+  <text x="82" y="130" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="18">A primitive is a bounded source span with a contract.</text>
 
-  <path d="M230 226 L230 164 L970 164" stroke="#990001" stroke-width="2"/>
-  <text x="990" y="170" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">opening fence</text>
-  <path d="M214 252 L214 574 L970 574" stroke="#990001" stroke-width="2"/>
-  <text x="990" y="580" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">closing fence</text>
-  <path d="M212 246 L212 120 L1040 120" stroke="#B00000" stroke-width="2"/>
-  <text x="1060" y="126" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">type: cta</text>
-  <path d="M314 246 L314 534 L970 534" stroke="#990001" stroke-width="2"/>
-  <text x="990" y="540" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">attributes: href, label</text>
-  <path d="M352 306 L352 76 L970 76" stroke="#990001" stroke-width="2"/>
-  <text x="990" y="82" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">content body</text>
-  <path d="M250 448 L250 620 L970 620" stroke="#D87A22" stroke-width="2"/>
-  <text x="990" y="626" fill="#F2F0EA" font-family="JetBrains Mono, monospace" font-size="18">source span + checksum</text>
+  <rect x="80" y="178" width="760" height="380" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <rect x="80" y="178" width="760" height="42" fill="#1A1A1A"/>
+  <text x="110" y="205" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="15">input.md</text>
+
+  <text x="116" y="272" fill="#737373" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="17">12</text>
+  <text x="116" y="334" fill="#737373" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="17">13</text>
+  <text x="116" y="396" fill="#737373" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="17">14</text>
+  <rect x="154" y="244" width="632" height="178" fill="#1A0808" stroke="#990001" stroke-width="2"/>
+  <text x="178" y="272" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="22">:::cta{href="/demo" label="Book demo"}</text>
+  <text x="178" y="334" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="22">Bring one broken workflow.</text>
+  <text x="178" y="396" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="22">:::</text>
+  <text x="178" y="492" fill="#737373" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="17">source: L12-L14</text>
+  <text x="448" y="492" fill="#737373" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="17">sha256: 9f1c2a7b...</text>
+
+  <rect x="910" y="196" width="390" height="320" fill="#0F0F0F" stroke="#262626" stroke-width="2"/>
+  <text x="944" y="248" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">type</text>
+  <text x="1120" y="248" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">cta</text>
+  <line x1="944" y1="276" x2="1266" y2="276" stroke="#262626" stroke-width="1"/>
+  <text x="944" y="318" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">attributes</text>
+  <text x="1120" y="318" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">href, label</text>
+  <line x1="944" y1="346" x2="1266" y2="346" stroke="#262626" stroke-width="1"/>
+  <text x="944" y="388" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">content</text>
+  <text x="1120" y="388" fill="#B3B3B3" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">line 13</text>
+  <line x1="944" y1="416" x2="1266" y2="416" stroke="#262626" stroke-width="1"/>
+  <text x="944" y="458" fill="#F2F0EA" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">gate</text>
+  <text x="1120" y="458" fill="#2E7D4F" font-family="JetBrains Mono, Cascadia Mono, monospace" font-size="20">checksum</text>
+
+  <path d="M786 266 H880 V248 H910" fill="none" stroke="#990001" stroke-width="2"/>
+  <path d="M536 266 H880 V318 H910" fill="none" stroke="#990001" stroke-width="2"/>
+  <path d="M456 328 H880 V388 H910" fill="none" stroke="#990001" stroke-width="2"/>
+  <path d="M456 492 H880 V458 H910" fill="none" stroke="#D87A22" stroke-width="2"/>
+  <circle cx="786" cy="266" r="5" fill="#990001"/>
+  <circle cx="536" cy="266" r="5" fill="#990001"/>
+  <circle cx="456" cy="328" r="5" fill="#990001"/>
+  <circle cx="456" cy="492" r="5" fill="#D87A22"/>
 </svg>
