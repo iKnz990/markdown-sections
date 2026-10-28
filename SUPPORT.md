@@ -1,6 +1,6 @@
 # Support
 
-Use GitHub Discussions for questions once the repository is published.
+Read the [README](README.md), [runnable examples](examples/README.md), and [editing workflow](docs/llm-editing-workflow.md) first. Report bugs and documentation gaps through [GitHub Issues](https://github.com/iKnz990/markdown-sections/issues). This project does not currently promise a Discussions forum or a support response time.
 
 Use GitHub Issues for:
 
@@ -12,3 +12,5 @@ Use GitHub Issues for:
 - documentation gaps
 
 For security issues, follow `SECURITY.md` instead of opening a public issue.
+
+Include the package version or commit, PHP version, the smallest relevant Markdown input, expected and actual output, and the code needed to reproduce the issue. Remove credentials, client content, and other private data before sharing a reproduction.

@@ -21,7 +21,15 @@ The package rewrites known section spans and preserves everything else exactly.
 - It does not normalize headings, lists, code fences, links, or prose.
 - It does not promise full CommonMark AST round-tripping.
 - It does not try to merge conflicting edits.
-- It does not validate semantic meaning unless a primitive definition is registered.
+- Registering a primitive definition does not automatically validate an edit. Call the registry before and after applying a proposed patch, and inspect parser diagnostics separately.
+
+## Application Responsibilities
+
+The checksum gate compares the patch against the supplied in-memory `MarkdownDocument`. Applying it to an old object cannot detect that another process has changed a stored file. The library does not provide authorization, file locking, atomic writes, signatures, or automatic conflict merging.
+
+Load the current source before applying the reviewed patch. Keep the read/check/write operation inside an application-level lock or use storage compare-and-swap so a concurrent change cannot be overwritten after the checksum check. Rebuild and review a patch when its source has changed.
+
+Primitive contracts check section structure, not arbitrary HTML or the meaning of attribute values. Unregistered types are ignored unless `validate($document, reportUnknown: true)` is used. A successful validation does not override parser diagnostics or authorize persistence.
 
 ## Review Rule
 

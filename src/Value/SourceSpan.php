@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Nocturnal\MarkdownSections\Value;
 
+use InvalidArgumentException;
+
 final readonly class SourceSpan
 {
     public function __construct(
@@ -12,6 +14,9 @@ final readonly class SourceSpan
         public int $startOffset,
         public int $endOffset,
     ) {
+        if ($startLine < 1 || $endLine < $startLine || $startOffset < 0 || $endOffset < $startOffset) {
+            throw new InvalidArgumentException('Source spans require positive ordered lines and non-negative ordered offsets.');
+        }
     }
 
     public function length(): int

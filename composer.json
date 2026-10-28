@@ -2,6 +2,7 @@
     "name": "nocturnal/markdown-sections",
     "description": "Safe Markdown edits for agents with source-preserving PHP primitive patches.",
     "type": "library",
+    "homepage": "https://github.com/iKnz990/markdown-sections",
     "keywords": [
         "commonmark",
         "cms",
@@ -19,6 +20,10 @@
             "name": "Nocturnal Marketing"
         }
     ],
+    "support": {
+        "issues": "https://github.com/iKnz990/markdown-sections/issues",
+        "source": "https://github.com/iKnz990/markdown-sections"
+    },
     "require": {
         "php": ">=8.2",
         "league/commonmark": "^2.8"
@@ -39,12 +44,15 @@
     },
     "scripts": {
         "check-composer": "composer validate --strict",
+        "check-syntax": "@php tools/check-syntax.php",
         "test": "phpunit",
         "analyse": "phpstan analyse",
         "check-examples": "php tools/run-examples.php",
         "check-lines": "php tools/check-file-lines.php src tests examples tools",
+        "check-archive": "@php tools/check-archive.php",
         "qa": [
             "@check-composer",
+            "@check-syntax",
             "@test",
             "@analyse",
             "@check-examples",
@@ -53,5 +61,22 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "archive": {
+        "exclude": [
+            "/vendor",
+            "/composer.lock",
+            "/.phpunit.cache",
+            "/.phpunit.result.cache",
+            "/.phpstan.cache",
+            "/coverage",
+            "/build",
+            "/.idea",
+            "/.vscode",
+            "*.log",
+            "*.tmp",
+            ".DS_Store",
+            "Thumbs.db"
+        ]
     }
 }

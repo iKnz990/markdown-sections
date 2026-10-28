@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Nocturnal\MarkdownSections\Value;
 
 use InvalidArgumentException;
+use Nocturnal\MarkdownSections\Parser\FencedCodeTracker;
+use Nocturnal\MarkdownSections\Parser\LiteralCodeLines;
+use Nocturnal\MarkdownSections\Parser\SourceLines;
 use Nocturnal\MarkdownSections\Parser\SectionSyntax;
 
 final readonly class SectionDraft
@@ -16,6 +19,23 @@ final readonly class SectionDraft
     ) {
         if (! SectionSyntax::isValidType($type)) {
             throw new InvalidArgumentException("Invalid section type \"$type\".");
+        }
+
+        $code = new FencedCodeTracker();
+        $literalCode = LiteralCodeLines::fromMarkdown($content);
+        foreach (SourceLines::split($content) as $index => $line) {
+            if ($literalCode->contains($index + 1) || $code->consume($line->text)) {
+                continue;
+            }
+            if (SectionSyntax::isClosing($line->text)) {
+                throw new InvalidArgumentException('Section content cannot contain a closing section fence outside fenced code.');
+            }
+            if (preg_match('/\A {0,3}:::/', $line->text) === 1 && SectionSyntax::matchOpening(trim($line->text)) !== null) {
+                throw new InvalidArgumentException('Section content cannot contain nested section opening fences outside fenced code.');
+            }
+        }
+        if ($code->isOpen() || $literalCode->hasUnclosedFence) {
+            throw new InvalidArgumentException('Section content must close its fenced code blocks.');
         }
     }
 

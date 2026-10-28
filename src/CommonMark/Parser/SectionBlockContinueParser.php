@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Nocturnal\MarkdownSections\CommonMark\Parser;
 
 use League\CommonMark\Node\Block\AbstractBlock;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
 use League\CommonMark\Parser\Block\AbstractBlockContinueParser;
 use League\CommonMark\Parser\Block\BlockContinue;
 use League\CommonMark\Parser\Block\BlockContinueParserInterface;
@@ -49,12 +50,10 @@ final class SectionBlockContinueParser extends AbstractBlockContinueParser
 
     public function tryContinue(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): BlockContinue
     {
-        unset($activeBlockParser);
-
         $line = $cursor->getLine();
         $this->rawLines[] = $line;
 
-        if (SectionSyntax::isClosing($line)) {
+        if (! $cursor->isIndented() && ! $activeBlockParser->getBlock() instanceof FencedCode && SectionSyntax::isClosing($line)) {
             $this->block->markClosed();
 
             return BlockContinue::finished();
