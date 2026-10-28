@@ -14,14 +14,14 @@ Optional League CommonMark integration renders sections as HTML.
 
 ## Install
 
-The package is not on Packagist yet. Install the current development branch through Composer's VCS support:
+Install a tagged release directly from the public GitHub repository through Composer's VCS support. The package is not on Packagist yet:
 
 ```bash
 composer config repositories.nocturnal-markdown-sections vcs https://github.com/iKnz990/markdown-sections
-composer require nocturnal/markdown-sections:dev-main
+composer require "nocturnal/markdown-sections:^0.1"
 ```
 
-While the repository is private, this requires a GitHub account with access. Composer records the resolved commit in your application's lockfile. Use a reviewed tagged version once one is available.
+Composer records the resolved release commit in your application's lockfile. Use `dev-main` only when you deliberately need unreleased development changes.
 
 To contribute or run the examples:
 
@@ -178,7 +178,7 @@ The contract is direct:
 - Patches are tied to the document checksum that produced them.
 - Applying a patch to a different document state throws.
 - Section updates regenerate only the selected section block.
-- Insert and append operations add generated section Markdown without reparsing unrelated prose.
+- Insert and append operations add generated section Markdown without regenerating unrelated prose; the result is reparsed for section discovery and diagnostics.
 
 Preservation contract tested: when a section changes, prefix and suffix remain byte-for-byte identical.
 
@@ -216,7 +216,7 @@ These methods return new `MarkdownDocument` instances. The original document is 
 ## Syntax
 
 - Opening fence: `:::type` or `:::type{key="value" key2=value}`
-- Closing fence: a line whose trimmed content is exactly `:::`
+- Closing fence: `:::` on its own line with at most three leading spaces, outside literal code
 - Type names may contain letters, numbers, `_`, and `-`
 - Attribute values may be quoted or unquoted
 - Quoted values support escaped quotes and backslashes

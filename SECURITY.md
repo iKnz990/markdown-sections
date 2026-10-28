@@ -2,13 +2,13 @@
 
 ## Supported Versions
 
-Until the first tagged release, reports should identify the affected commit. After release, fixes target the latest supported release; older versions may require an upgrade.
+Security fixes target the latest `0.1.x` release. Reports should identify the affected version or commit; older versions may require an upgrade.
 
 ## Reporting A Vulnerability
 
 Please do not report security issues in public GitHub issues.
 
-Use [GitHub private vulnerability reporting](https://github.com/iKnz990/markdown-sections/security/advisories/new) when enabled. If that option is unavailable, open an issue asking the maintainer for a private reporting channel without including vulnerability details or a reproduction. Include in the private report:
+Use [GitHub private vulnerability reporting](https://github.com/iKnz990/markdown-sections/security/advisories/new). If that option is unavailable, open an issue asking the maintainer for a private reporting channel without including vulnerability details or a reproduction. Include in the private report:
 
 - affected version or commit
 - minimal reproduction
