@@ -23,7 +23,6 @@ final readonly class LiteralCodeLines
     {
         $environment = (new Environment([]))->addExtension(new CommonMarkCoreExtension());
         $walker = (new MarkdownParser($environment))->parse($markdown)->walker();
-        $sourceLines = SourceLines::split($markdown);
         $lines = [];
         $unclosed = false;
 
@@ -43,10 +42,9 @@ final readonly class LiteralCodeLines
             }
 
             if ($node instanceof FencedCode) {
-                $lastLine = $sourceLines[$endLine - 1]->text ?? '';
-                $closing = (string) preg_replace('/\A[ \t]*(?:>[ \t]*)*/', '', $lastLine);
-                $pattern = '/\A' . preg_quote($node->getChar(), '/') . '{' . $node->getLength() . ',}[ \t]*\z/';
-                if ($startLine === $endLine || preg_match($pattern, $closing) !== 1) {
+                // CommonMark excludes an explicit closer from the literal, but not a
+                // final content line when a container ends or the input reaches EOF.
+                if ($endLine - $startLine !== substr_count($node->getLiteral(), "\n") + 1) {
                     $unclosed = true;
                 }
             }

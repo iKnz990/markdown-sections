@@ -62,11 +62,9 @@ final class MarkdownSectionParser
             if ($parsed['section'] instanceof Section) {
                 $sections[] = $parsed['section'];
                 $sectionCount++;
-                $line = $parsed['endIndex'] + 1;
-                continue;
             }
 
-            $line++;
+            $line = $parsed['endIndex'] + 1;
         }
 
         return new MarkdownDocument($markdown, $sections, $diagnostics, $this->limits);
@@ -90,7 +88,7 @@ final class MarkdownSectionParser
             return [
                 'section' => null,
                 'diagnostics' => [...$syntaxDiagnostics, Diagnostic::unclosedSection($opening->type, $startIndex + 1)],
-                'endIndex' => $startIndex,
+                'endIndex' => count($lines) - 1,
             ];
         }
 
