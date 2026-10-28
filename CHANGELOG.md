@@ -6,6 +6,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+### Fixed
+
+- Process malformed or oversized section regions once instead of repeatedly scanning nested openers and allocating duplicate diagnostics.
+- Keep rendered section boundaries consistent when list or blockquote containers end a fenced code block.
+- Reject draft code fences whose apparent closing delimiter is indented as literal content.
+
 ## [0.1.0] - 2026-10-28
 
 ### Fixed

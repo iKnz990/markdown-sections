@@ -6,6 +6,10 @@ namespace Nocturnal\MarkdownSections\CommonMark\Parser;
 
 use League\CommonMark\Node\Block\AbstractBlock;
 use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
+use League\CommonMark\Extension\CommonMark\Node\Block\BlockQuote;
+use League\CommonMark\Extension\CommonMark\Node\Block\ListItem;
+use League\CommonMark\Extension\CommonMark\Parser\Block\BlockQuoteParser;
+use League\CommonMark\Extension\CommonMark\Parser\Block\ListItemParser;
 use League\CommonMark\Parser\Block\AbstractBlockContinueParser;
 use League\CommonMark\Parser\Block\BlockContinue;
 use League\CommonMark\Parser\Block\BlockContinueParserInterface;
@@ -53,7 +57,8 @@ final class SectionBlockContinueParser extends AbstractBlockContinueParser
         $line = $cursor->getLine();
         $this->rawLines[] = $line;
 
-        if (! $cursor->isIndented() && ! $activeBlockParser->getBlock() instanceof FencedCode && SectionSyntax::isClosing($line)) {
+        if (! $cursor->isIndented() && SectionSyntax::isClosing($line)
+            && ! $this->fencedCodeContinues($cursor, $activeBlockParser)) {
             $this->block->markClosed();
 
             return BlockContinue::finished();
@@ -65,5 +70,43 @@ final class SectionBlockContinueParser extends AbstractBlockContinueParser
     public function closeBlock(): void
     {
         $this->block->setRawSource(implode("\n", $this->rawLines));
+    }
+
+    private function fencedCodeContinues(Cursor $cursor, BlockContinueParserInterface $activeBlockParser): bool
+    {
+        if (! $activeBlockParser->getBlock() instanceof FencedCode) {
+            return false;
+        }
+
+        $containers = [];
+        for ($node = $activeBlockParser->getBlock()->parent(); $node !== $this->block; $node = $node->parent()) {
+            if ($node === null) {
+                return false;
+            }
+            $containers[] = $node;
+        }
+
+        $cursor = clone $cursor;
+        foreach (array_reverse($containers) as $container) {
+            // Probe fresh core parsers; the real descendants have not continued yet.
+            $parser = match (true) {
+                $container instanceof ListItem => new ListItemParser($container->getListData()),
+                $container instanceof BlockQuote => new BlockQuoteParser(),
+                default => null,
+            };
+            if ($parser === null) {
+                continue;
+            }
+
+            $continuation = $parser->tryContinue(clone $cursor, $activeBlockParser);
+            if ($continuation === null || $continuation->isFinalize()) {
+                return false;
+            }
+            if (($state = $continuation->getCursorState()) !== null) {
+                $cursor->restoreState($state);
+            }
+        }
+
+        return true;
     }
 }
