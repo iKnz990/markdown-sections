@@ -31,12 +31,20 @@ final class MarkdownSectionParser
         }
 
         $lines = SourceLines::split($markdown);
+        $literalCode = LiteralCodeLines::fromMarkdown($markdown);
         $sections = [];
         $diagnostics = [];
         $line = 0;
         $sectionCount = 0;
+        $code = new FencedCodeTracker();
 
         while ($line < count($lines)) {
+            if ($literalCode->contains($line + 1) || $code->consume($lines[$line]->text)
+                || preg_match('/^(?: {4}| {0,3}\t)/', $lines[$line]->text) === 1) {
+                $line++;
+                continue;
+            }
+
             $opening = SectionSyntax::matchOpening(trim($lines[$line]->text));
             if ($opening === null) {
                 $line++;
@@ -48,7 +56,7 @@ final class MarkdownSectionParser
                 break;
             }
 
-            $parsed = $this->parseSection($markdown, $lines, $line, $opening, $sectionCount);
+            $parsed = $this->parseSection($markdown, $lines, $line, $opening, $sectionCount, $literalCode);
             array_push($diagnostics, ...$parsed['diagnostics']);
 
             if ($parsed['section'] instanceof Section) {
@@ -61,7 +69,7 @@ final class MarkdownSectionParser
             $line++;
         }
 
-        return new MarkdownDocument($markdown, $sections, $diagnostics);
+        return new MarkdownDocument($markdown, $sections, $diagnostics, $this->limits);
     }
 
     /**
@@ -74,12 +82,14 @@ final class MarkdownSectionParser
         int $startIndex,
         OpeningFence $opening,
         int $sectionIndex,
+        LiteralCodeLines $literalCode,
     ): array {
-        $endIndex = $this->findClosingFence($lines, $startIndex + 1);
+        $syntaxDiagnostics = [];
+        $endIndex = $this->findClosingFence($lines, $startIndex + 1, $syntaxDiagnostics, $literalCode);
         if ($endIndex === null) {
             return [
                 'section' => null,
-                'diagnostics' => [Diagnostic::unclosedSection($opening->type, $startIndex + 1)],
+                'diagnostics' => [...$syntaxDiagnostics, Diagnostic::unclosedSection($opening->type, $startIndex + 1)],
                 'endIndex' => $startIndex,
             ];
         }
@@ -88,7 +98,7 @@ final class MarkdownSectionParser
         if ($sectionSize > $this->limits->maxSectionSize) {
             return [
                 'section' => null,
-                'diagnostics' => [Diagnostic::limitExceeded('Section content exceeds maximum size.', $startIndex + 1)],
+                'diagnostics' => [...$syntaxDiagnostics, Diagnostic::limitExceeded('Section content exceeds maximum size.', $startIndex + 1)],
                 'endIndex' => $endIndex,
             ];
         }
@@ -112,19 +122,29 @@ final class MarkdownSectionParser
 
         return [
             'section' => $section,
-            'diagnostics' => $attributeResult->diagnostics,
+            'diagnostics' => [...$syntaxDiagnostics, ...$attributeResult->diagnostics],
             'endIndex' => $endIndex,
         ];
     }
 
     /**
      * @param list<SourceLine> $lines
+     * @param list<Diagnostic> $diagnostics
      */
-    private function findClosingFence(array $lines, int $startIndex): ?int
+    private function findClosingFence(array $lines, int $startIndex, array &$diagnostics, LiteralCodeLines $literalCode): ?int
     {
+        $code = new FencedCodeTracker();
         for ($index = $startIndex; $index < count($lines); $index++) {
+            if ($literalCode->contains($index + 1) || $code->consume($lines[$index]->text)) {
+                continue;
+            }
+
             if (SectionSyntax::isClosing($lines[$index]->text)) {
                 return $index;
+            }
+            if (preg_match('/\A {0,3}:::/', $lines[$index]->text) === 1
+                && SectionSyntax::matchOpening(trim($lines[$index]->text)) !== null) {
+                $diagnostics[] = new Diagnostic('nested_section', 'Nested section fences are unsupported and remain literal content.', $index + 1);
             }
         }
 

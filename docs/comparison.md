@@ -8,12 +8,15 @@ Its lane is narrower: safely patch named source spans in Markdown documents.
 
 | Tool category | What it is good at | Where this package differs |
 | --- | --- | --- |
-| League CommonMark | Standards-oriented Markdown parsing and HTML rendering. | This package uses League CommonMark for rendering, but its main API is source-preserving section edits. |
-| CommonMark container extensions | Custom block syntax rendered to HTML. | Rendering is optional here. Patch previews, checksums, and primitive validation are the core workflow. |
-| remark / mdast directives | JavaScript Markdown AST and directive tooling. | This package is PHP-first and does not ask consumers to serialize the whole Markdown AST back to source. |
+| [League CommonMark](https://github.com/thephpleague/commonmark) | Standards-oriented Markdown parsing and HTML rendering. | This package uses League CommonMark for rendering, but its main API is source-preserving section edits. |
+| [CommonMark directives](https://github.com/matfire/commonmark-directives) | Custom directive syntax rendered through PHP's League CommonMark. | Rendering is optional here. Patch previews, checksums, and explicit primitive validation form the editing workflow. |
+| [remark directives](https://github.com/remarkjs/remark-directive) | JavaScript Markdown AST and directive tooling. | This package is PHP-first and does not ask consumers to serialize the whole Markdown AST back to source. |
+| [markdown-replace-section](https://github.com/renke/markdown-replace-section) / [update-sections](https://github.com/jonschlinkert/update-sections) | Targeted replacement and other operations on heading-selected Markdown sections. | This package targets fenced primitives and exposes byte spans, source checksums, patch previews, and structural contracts. |
 | MDX | Rich component authoring inside Markdown-like files. | This package does not replace MDX. It gives existing Markdown files bounded editable primitives. |
 | WordPress shortcodes | CMS-native embedded content blocks. | This package is framework-agnostic and exposes source spans, checksums, and immutable patches. |
 | Generic Markdown parsers | Tokenizing, AST building, or HTML conversion. | This package treats unbounded rewrites as the problem and limits mutation to known section spans. |
+
+Section replacement, directive syntax, and source-range edits are established techniques. This package combines them into a focused PHP editing API; it does not claim to invent those techniques or certify an agent's behavior.
 
 ## Why The Distinction Matters
 

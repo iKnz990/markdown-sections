@@ -6,6 +6,20 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-28
+
+### Fixed
+
+- Preserve a valid section boundary when inserting after a final section without a trailing newline.
+- Reject stale insertion anchors, invalid patch spans, and draft values that escape their section boundaries.
+- Ignore fenced and indented code examples when discovering editable sections; preserve fenced code inside sections.
+- Keep flat-section validation and rendering consistent; reject nested draft fences and report nested source fences.
+- Retain configured parser limits when applying edits.
+- Correct public repository links and clarify validation, HTML rendering, and file-write responsibilities.
+- Accept PHP's empty attribute-map JSON representation in the published edit-manifest schema.
+- Require CommonMark 2.10.2 or later in the 2.x series, excluding older releases with published security advisories.
+- Exclude local dependencies, lockfiles, caches, and generated state from Composer archives while retaining source QA files.
+
 ### Added
 
 - Source-preserving immutable document API for custom fenced Markdown sections.
@@ -16,3 +30,4 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Diagnostics for malformed attributes and unclosed sections.
 - Examples covering parsing, manipulation, diagnostics, limits, rendering, primitive validation, and patch previews.
 - Nocturnal repair-infrastructure README, SVG diagrams, comparison docs, and edit manifest schema.
+- PHP syntax checks, archive inspection, fresh-consumer smoke checks, third-party notices, and CI coverage for PHP 8.2–8.5 plus lowest supported dependencies.

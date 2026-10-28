@@ -7,6 +7,7 @@ namespace Nocturnal\MarkdownSections\Editing;
 use InvalidArgumentException;
 use Nocturnal\MarkdownSections\MarkdownDocument;
 use Nocturnal\MarkdownSections\MarkdownSections;
+use Nocturnal\MarkdownSections\Parser\ParserLimits;
 
 final readonly class DocumentPatch
 {
@@ -17,13 +18,24 @@ final readonly class DocumentPatch
         private string $originalMarkdown,
         public string $documentChecksum,
         private array $operations,
+        private ?ParserLimits $limits = null,
     ) {
+        if (PatchOperation::checksum($originalMarkdown) !== $documentChecksum) {
+            throw new InvalidArgumentException('Patch checksum does not match its original document source.');
+        }
+
+        foreach ($operations as $operation) {
+            if ($operation->span->endOffset > strlen($originalMarkdown)) {
+                throw new InvalidArgumentException('Patch operation source span exceeds the document length.');
+            }
+        }
+
         $this->assertNonOverlapping($operations);
     }
 
-    public static function fromOperation(string $originalMarkdown, PatchOperation $operation): self
+    public static function fromOperation(string $originalMarkdown, PatchOperation $operation, ?ParserLimits $limits = null): self
     {
-        return new self($originalMarkdown, PatchOperation::checksum($originalMarkdown), [$operation]);
+        return new self($originalMarkdown, PatchOperation::checksum($originalMarkdown), [$operation], $limits);
     }
 
     /**
@@ -49,7 +61,8 @@ final readonly class DocumentPatch
         $operations = $this->operations;
         usort(
             $operations,
-            static fn(PatchOperation $left, PatchOperation $right): int => $right->span->startOffset <=> $left->span->startOffset
+            static fn(PatchOperation $left, PatchOperation $right): int => ($right->span->startOffset <=> $left->span->startOffset)
+                ?: ($right->span->endOffset <=> $left->span->endOffset)
         );
 
         foreach ($operations as $operation) {
@@ -62,12 +75,12 @@ final readonly class DocumentPatch
                 . substr($updated, $operation->span->endOffset);
         }
 
-        return MarkdownSections::parse($updated);
+        return MarkdownSections::parse($updated, $document->parserLimits());
     }
 
     public function toMarkdown(): string
     {
-        return $this->applyTo(MarkdownSections::parse($this->originalMarkdown))->toMarkdown();
+        return $this->applyTo(MarkdownSections::parse($this->originalMarkdown, $this->limits))->toMarkdown();
     }
 
     public function toUnifiedDiff(string $from = 'original.md', string $to = 'updated.md'): string
@@ -108,16 +121,20 @@ final readonly class DocumentPatch
     {
         usort(
             $operations,
-            static fn(PatchOperation $left, PatchOperation $right): int => $left->span->startOffset <=> $right->span->startOffset
+            static fn(PatchOperation $left, PatchOperation $right): int => ($left->span->startOffset <=> $right->span->startOffset)
+                ?: ($left->span->endOffset <=> $right->span->endOffset)
         );
 
         $previousEnd = -1;
+        $previousInsertion = -1;
         foreach ($operations as $operation) {
-            if ($operation->span->startOffset < $previousEnd) {
+            if ($operation->span->startOffset < $previousEnd
+                || ($operation->isInsertion() && $operation->span->startOffset === $previousInsertion)) {
                 throw new InvalidArgumentException('Patch operations must not overlap.');
             }
 
             $previousEnd = $operation->span->endOffset;
+            $previousInsertion = $operation->isInsertion() ? $operation->span->startOffset : -1;
         }
     }
 

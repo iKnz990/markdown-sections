@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Nocturnal\MarkdownSections\Value;
 
+use InvalidArgumentException;
+
 final readonly class SectionAttributes
 {
     /**
@@ -18,6 +20,15 @@ final readonly class SectionAttributes
      */
     public static function fromArray(array $values): self
     {
+        foreach ($values as $key => $value) {
+            if (preg_match('/\A[A-Za-z_][A-Za-z0-9_-]*\z/', $key) !== 1) {
+                throw new InvalidArgumentException('Section attribute names must use the supported identifier syntax.');
+            }
+            if (str_contains($value, "\r") || str_contains($value, "\n")) {
+                throw new InvalidArgumentException('Section attribute values must fit on one line.');
+            }
+        }
+
         return new self($values);
     }
 

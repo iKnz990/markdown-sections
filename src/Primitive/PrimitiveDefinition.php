@@ -131,7 +131,7 @@ final readonly class PrimitiveDefinition
     private function assertValidAttributeNames(array $names): void
     {
         foreach ($names as $name) {
-            if (preg_match('/^[A-Za-z_][A-Za-z0-9_-]*$/', $name) !== 1) {
+            if (preg_match('/\A[A-Za-z_][A-Za-z0-9_-]*\z/', $name) !== 1) {
                 throw new InvalidArgumentException("Invalid primitive attribute \"$name\".");
             }
         }

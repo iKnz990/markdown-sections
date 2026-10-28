@@ -10,7 +10,7 @@ final class SectionSyntax
 
     public static function matchOpening(string $trimmedLine): ?OpeningFence
     {
-        if (! preg_match('/^:::(' . self::TYPE_PATTERN . ')(?:\{(.*)\})?$/', $trimmedLine, $matches)) {
+        if (! preg_match('/\A:::(' . self::TYPE_PATTERN . ')(?:\{(.*)\})?\z/', $trimmedLine, $matches)) {
             return null;
         }
 
@@ -19,11 +19,11 @@ final class SectionSyntax
 
     public static function isClosing(string $line): bool
     {
-        return trim($line) === ':::';
+        return preg_match('/\A {0,3}:::[ \t]*\z/', $line) === 1;
     }
 
     public static function isValidType(string $type): bool
     {
-        return preg_match('/^' . self::TYPE_PATTERN . '$/', $type) === 1;
+        return preg_match('/\A' . self::TYPE_PATTERN . '\z/', $type) === 1;
     }
 }

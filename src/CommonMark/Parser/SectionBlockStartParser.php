@@ -8,6 +8,7 @@ use League\CommonMark\Parser\Block\BlockStart;
 use League\CommonMark\Parser\Block\BlockStartParserInterface;
 use League\CommonMark\Parser\Cursor;
 use League\CommonMark\Parser\MarkdownParserStateInterface;
+use Nocturnal\MarkdownSections\CommonMark\Node\SectionNode;
 use Nocturnal\MarkdownSections\Parser\AttributeParser;
 use Nocturnal\MarkdownSections\Parser\SectionSyntax;
 
@@ -19,7 +20,11 @@ final class SectionBlockStartParser implements BlockStartParserInterface
 
     public function tryStart(Cursor $cursor, MarkdownParserStateInterface $parserState): ?BlockStart
     {
-        unset($parserState);
+        for ($node = $parserState->getLastMatchedBlockParser()->getBlock(); $node !== null; $node = $node->parent()) {
+            if ($node instanceof SectionNode) {
+                return BlockStart::none();
+            }
+        }
 
         if ($cursor->isIndented() || $cursor->getNextNonSpaceCharacter() !== ':') {
             return BlockStart::none();

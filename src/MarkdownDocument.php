@@ -7,6 +7,7 @@ namespace Nocturnal\MarkdownSections;
 use InvalidArgumentException;
 use Nocturnal\MarkdownSections\Editing\DocumentPatch;
 use Nocturnal\MarkdownSections\Editing\PatchOperation;
+use Nocturnal\MarkdownSections\Parser\ParserLimits;
 use Nocturnal\MarkdownSections\Primitive\PrimitiveIssue;
 use Nocturnal\MarkdownSections\Primitive\PrimitiveRegistry;
 use Nocturnal\MarkdownSections\Value\Diagnostic;
@@ -23,6 +24,7 @@ final readonly class MarkdownDocument
         private string $markdown,
         private array $sections,
         private array $diagnostics = [],
+        private ?ParserLimits $limits = null,
     ) {
     }
 
@@ -34,6 +36,11 @@ final readonly class MarkdownDocument
     public function checksum(): string
     {
         return PatchOperation::checksum($this->markdown);
+    }
+
+    public function parserLimits(): ParserLimits
+    {
+        return $this->limits ?? ParserLimits::defaults();
     }
 
     /**
@@ -100,6 +107,7 @@ final readonly class MarkdownDocument
 
     public function previewInsertSectionBefore(Section $section, SectionDraft $draft): DocumentPatch
     {
+        $this->assertSectionMatches($section);
         $lineEnding = $this->lineEndingForInsertion($section);
         $operation = PatchOperation::insert(
             $section->span->startOffset,
@@ -108,21 +116,23 @@ final readonly class MarkdownDocument
             'insert before ' . $section->type,
         );
 
-        return DocumentPatch::fromOperation($this->markdown, $operation);
+        return DocumentPatch::fromOperation($this->markdown, $operation, $this->parserLimits());
     }
 
     public function previewInsertSectionAfter(Section $section, SectionDraft $draft): DocumentPatch
     {
+        $this->assertSectionMatches($section);
         $lineEnding = $this->lineEndingForInsertion($section);
         $offset = $this->offsetAfterSectionLine($section);
+        $prefix = $offset === $section->span->endOffset ? $lineEnding : '';
         $operation = PatchOperation::insert(
             $offset,
             $section->span->endLine + 1,
-            $draft->toMarkdown($lineEnding) . $lineEnding . $lineEnding,
+            $prefix . $draft->toMarkdown($lineEnding) . $lineEnding . $lineEnding,
             'insert after ' . $section->type,
         );
 
-        return DocumentPatch::fromOperation($this->markdown, $operation);
+        return DocumentPatch::fromOperation($this->markdown, $operation, $this->parserLimits());
     }
 
     public function previewAppendSection(SectionDraft $draft): DocumentPatch
@@ -136,7 +146,7 @@ final readonly class MarkdownDocument
             'append ' . $draft->type,
         );
 
-        return DocumentPatch::fromOperation($this->markdown, $operation);
+        return DocumentPatch::fromOperation($this->markdown, $operation, $this->parserLimits());
     }
 
     public function applyPatch(DocumentPatch $patch): self
@@ -193,16 +203,22 @@ final readonly class MarkdownDocument
 
     private function previewReplacement(Section $section, string $replacement, string $label): DocumentPatch
     {
+        $this->assertSectionMatches($section);
+
+        return DocumentPatch::fromOperation(
+            $this->markdown,
+            PatchOperation::replace($section->span, $section->rawBlock, $replacement, $label),
+            $this->parserLimits(),
+        );
+    }
+
+    private function assertSectionMatches(Section $section): void
+    {
         $current = substr($this->markdown, $section->span->startOffset, $section->span->length());
 
         if ($current !== $section->rawBlock) {
             throw new InvalidArgumentException('The section does not match this document source.');
         }
-
-        return DocumentPatch::fromOperation(
-            $this->markdown,
-            PatchOperation::replace($section->span, $section->rawBlock, $replacement, $label),
-        );
     }
 
     private function lineEndingForInsertion(Section $section): string

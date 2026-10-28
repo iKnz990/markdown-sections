@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Nocturnal-Marketing/markdown-sections/blob/main/docs/edit-manifest.schema.json",
+  "$id": "https://github.com/iKnz990/markdown-sections/blob/main/docs/edit-manifest.schema.json",
   "title": "Nocturnal Markdown Sections Edit Manifest",
   "type": "object",
   "additionalProperties": false,
@@ -45,10 +45,17 @@
           "pattern": "^[A-Za-z0-9_-]+$"
         },
         "attributes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Attribute map. PHP json_encode emits [] for an empty map; nonempty maps are objects.",
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {"type": "string"}
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            }
+          ]
         },
         "content": {
           "type": "string"

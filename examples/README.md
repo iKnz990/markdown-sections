@@ -84,4 +84,8 @@ The document API is intentionally source-preserving. It does not reformat Markdo
 
 Primitive definitions are optional contracts layered on top of parsed sections. They let applications validate attributes and content before asking an agent, migration, or CMS job to create a patch.
 
+The examples print their results and do not authorize or persist edits. Call `PrimitiveRegistry::validate()` explicitly before and after applying a proposed patch, inspect `diagnostics()`, and reject issues before saving. Use `reportUnknown: true` when unregistered primitive types should be invalid. Applying a patch does not run these checks automatically.
+
 The CommonMark extension is the rendering path. It turns section blocks into CommonMark container nodes and lets the child Markdown render normally before passing the HTML to your renderer.
+
+For untrusted Markdown, configure CommonMark's `html_input`, `allow_unsafe_links`, and nesting limits. Custom renderers must validate and escape their own attribute values. See the [security policy](../SECURITY.md) and [CommonMark security guidance](https://commonmark.thephpleague.com/2.x/security/).
