@@ -15,6 +15,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Retain configured parser limits when applying edits.
 - Correct public repository links and clarify validation, HTML rendering, and file-write responsibilities.
 - Accept PHP's empty attribute-map JSON representation in the published edit-manifest schema.
+- Require CommonMark 2.10.2 or later in the 2.x series, excluding older releases with published security advisories.
 - Exclude local dependencies, lockfiles, caches, and generated state from Composer archives while retaining source QA files.
 
 ### Added

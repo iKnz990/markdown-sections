@@ -10,7 +10,7 @@
 
 Optional League CommonMark integration renders sections as HTML.
 
-`PHP 8.2+` · `League CommonMark 2.x` · `source spans` · `SHA-256 checksums` · `patch previews` · `primitive validation`
+`PHP 8.2+` · `League CommonMark 2.10.2+` · `source spans` · `SHA-256 checksums` · `patch previews` · `primitive validation`
 
 ## Install
 

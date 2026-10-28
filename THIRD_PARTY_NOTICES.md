@@ -8,6 +8,8 @@ Dependencies are installed separately by Composer. The source distribution does 
 
 The following runtime dependency snapshot was checked on October 28, 2026. Versions vary with the consuming application's dependency resolution; inspect its installed packages with `composer licenses` and preserve their included license files.
 
+The package requires CommonMark `^2.10.2`. [CommonMark 2.10.2](https://github.com/thephpleague/commonmark/releases/tag/2.10.2) includes fixes for published table-parser denial-of-service and raw-HTML-filtering advisories; older 2.x releases are excluded by this package's dependency constraint.
+
 | Package | Inspected version | Upstream license |
 | --- | --- | --- |
 | `league/commonmark` | `2.10.4` | [BSD-3-Clause](https://github.com/thephpleague/commonmark/blob/2.10.4/LICENSE) |
